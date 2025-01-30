@@ -1,75 +1,119 @@
-# Task Management API
+# Task Management API Documentation
 
 ## Overview
-This is a RESTful API for a Task Management System built using Node.js, Express.js, and MongoDB. It allows users to perform CRUD (Create, Read, Update, Delete) operations on tasks with JWT-based authentication.
+This API provides endpoints to create, read, update, and delete tasks. Authentication is required for all operations.
 
-## Features
-- User authentication with JWT
-- CRUD operations for tasks
-- Data validation and error handling
-- Secure API endpoints
-- Unit testing support
-
-## File Structure
+## Base URL
 ```
-- server.js
-- config/db.js
-- models/Task.js
-- middleware/auth.js
-- routes/taskRoutes.js
-- .env
-- package.json
+http://localhost:3009/tasks/
 ```
 
-## Installation
+## Authentication
+All routes require a valid JWT token in the `Authorization` header.
+```
+Authorization: Bearer <token>
+```
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-repo/task-management-api.git
-   cd task-management-api
-   ```
+---
+## Endpoints
 
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
+### 1. Create a New Task
+**Endpoint:**
+```
+POST /tasks
+```
+**Request Headers:**
+```
+Authorization: Bearer <token>
+```
+**Request Body:** (JSON)
+```json
+{
+  "title": "Task Title",
+  "description": "Task Description",
+  "status": "pending"
+}
+```
+**Response:**
+- `201 Created` - Task successfully created.
+- `400 Bad Request` - Invalid request data.
 
-3. Set up environment variables:
-   Create a `.env` file and add:
-   ```sh
-   MONGO_URI=
-JWT_SECRET=your_secret_key 
-   ```
+---
+### 2. Get All Tasks
+**Endpoint:**
+```
+GET /tasks
+```
+**Request Headers:**
+```
+Authorization: Bearer <token>
+```
+**Response:**
+- `200 OK` - Returns an array of tasks.
+- `400 Bad Request` - Error retrieving tasks.
 
-4. Start the server:
-   ```sh
-   npm start
-   ```
+---
+### 3. Get a Task by ID
+**Endpoint:**
+```
+GET /tasks/:id
+```
+**Request Headers:**
+```
+Authorization: Bearer <token>
+```
+**Response:**
+- `200 OK` - Returns the requested task.
+- `404 Not Found` - Task not found.
+- `400 Bad Request` - Invalid request.
 
-## API Endpoints
+---
+### 4. Update an Existing Task
+**Endpoint:**
+```
+PUT /tasks/:id
+```
+**Request Headers:**
+```
+Authorization: Bearer <token>
+```
+**Request Body:** (JSON, optional fields)
+```json
+{
+  "title": "Updated Title",
+  "description": "Updated Description",
+  "status": "completed"
+}
+```
+**Response:**
+- `200 OK` - Returns updated task.
+- `404 Not Found` - Task not found.
+- `400 Bad Request` - Invalid request.
 
-### Authentication (JWT required for all endpoints)
+---
+### 5. Delete a Task
+**Endpoint:**
+```
+DELETE /tasks/:id
+```
+**Request Headers:**
+```
+Authorization: Bearer <token>
+```
+**Response:**
+- `200 OK` - Task successfully deleted.
+- `404 Not Found` - Task not found.
+- `400 Bad Request` - Error deleting task.
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/tasks/` | Create a new task |
-| GET  | `/tasks/` | Get all tasks |
-| GET  | `/tasks/:id` | Get a task by ID |
-| PUT  | `/tasks/:id` | Update a task |
-| DELETE | `/tasks/:id` | Delete a task |
+---
+## Error Handling
+- **400 Bad Request** - Invalid input or request.
+- **401 Unauthorized** - Missing or invalid authentication token.
+- **404 Not Found** - Requested resource does not exist.
 
-## Usage
-- Use a tool like Postman to test API requests.
-- Provide the JWT token in the `Authorization` header as `Bearer <token>`.
-
-## Technologies Used
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- JSON Web Token (JWT)
-- bcrypt.js
-- cors
-
+## Notes
+- Ensure `authenticateToken` middleware is properly handling authentication.
+- Database interactions are handled using Mongoose.
+- Modify or extend schema as needed for additional fields.
 
 

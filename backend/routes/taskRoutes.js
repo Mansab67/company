@@ -8,7 +8,7 @@ router.post('/', authenticateToken, async (req, res) => {
     try {
         const task = new Task(req.body);
         await task.save();
-        res.status(201).json(task);  // Return the created task
+        res.status(201).json(task);  
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -35,7 +35,7 @@ router.get('/:id', authenticateToken, async (req, res) => {
     }
 });
 
-// Update an existing task by ID
+// Update an existing
 router.put('/:id', authenticateToken, async (req, res) => {
     try {
         const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });

@@ -13,7 +13,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Send name, email, and password to the server for registration
+      // Send name
       const res = await axios.post(
         "https://two447-event-connection-platform-2.onrender.com/user/signup",
         { name, email, password, role: "participant" } // Fixed role as "participant"
