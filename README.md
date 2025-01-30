@@ -23,18 +23,14 @@ This is a RESTful API for a Task Management System built using Node.js, Express.
 
 ## Installation
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-repo/task-management-api.git
-   cd task-management-api
-   ```
 
-2. Install dependencies:
+
+1. Install dependencies:
    ```sh
    npm install
    ```
 
-3. Set up environment variables:
+2. Set up environment variables:
    Create a `.env` file and add:
    ```sh
    MONGO_URI=
