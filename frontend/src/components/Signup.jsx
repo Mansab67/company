@@ -19,7 +19,7 @@ const Register = () => {
         { name, email, password, role: "participant" } // Fixed role as "participant"
       );
       alert(res.data.msg || "Registration successful");
-      navigate("/login"); // Redirect to login page after successful registration
+      navigate("/"); // Redirect 
     } catch (err) {
       alert(err.response?.data?.message || "Registration failed");
     }
