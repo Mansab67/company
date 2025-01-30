@@ -19,7 +19,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "https://two447-event-connection-platform-2.onrender.com/user/login",
+        "http://localhost:3009/auth/login",
         { email, password },
         { headers: { "Content-Type": "application/json" } }
       );

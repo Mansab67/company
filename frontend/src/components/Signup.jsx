@@ -15,7 +15,7 @@ const Register = () => {
     try {
       // Send name
       const res = await axios.post(
-        "https://two447-event-connection-platform-2.onrender.com/user/signup",
+        "http://localhost:3000/auth/signup",
         { name, email, password, role: "participant" } // Fixed role as "participant"
       );
       alert(res.data.msg || "Registration successful");
